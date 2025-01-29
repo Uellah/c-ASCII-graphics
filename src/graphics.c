@@ -5,9 +5,8 @@
 #include <locale.h>
 
 #include "graphics.h"
-#include "config.h"
 
-void copy(wchar_t from[H][W], wchar_t to[H][W]){
+void copy(char from[H][W], char to[H][W]){
   int i, j;
   for (i = 0; i < H; ++i){
       for (j = 0; j < W; ++j){
@@ -17,32 +16,41 @@ void copy(wchar_t from[H][W], wchar_t to[H][W]){
   return;
 }
 
-int valid_check(int i, int j){
-  return i >= 0 && i < H && j >=0 && j < W;
+void set_pixel(char buf[H][W], int x, int y, char bright){
+  if (x >= 0 && x < H && y >= 0 && y < W)
+    buf[y][x] = bright % BR_LEVEL;
 }
 
-void draw_circle(wchar_t buf[H][W], circle circ, char bright){
-  int i, j;
-  const int r_ = circ.r * circ.r;
-  const char true_br = bright % BR_LEVEL;
+void draw_circle(char buf[H][W], circle circ, char bright) {
+    int x = circ.r;
+    int y = 0;
+    int err = 0;
+    const int cx = circ.center.x;
+    const int cy = circ.center.y;
 
-  for (i = circ.center.y + circ.r; i >= circ.center.y - circ.r; i--){
+    while (x >= y) {
+        // Рисуем горизонтальные линии между точками
+        for (int i = cx - x; i <= cx + x; i++) {
+            set_pixel(buf, cy + y, i, bright);
+            set_pixel(buf, cy - y, i, bright);
+        }
+        for (int i = cx - y; i <= cx + y; i++) {
+            set_pixel(buf, cy + x, i, bright);
+            set_pixel(buf, cy - x, i, bright);
+        }
 
-    if (!valid_check(i, circ.center.x)) continue;
-    buf[i][circ.center.x] = true_br;
-
-    for (j = 1; j * j  + (i - circ.center.y) * (i - circ.center.y) <= r_; j++){
-
-      if (valid_check(i, circ.center.x + j))
-      buf[i][circ.center.x + j] = true_br;
-
-      if (valid_check(i, circ.center.x - j))
-      buf[i][circ.center.x - j] = true_br;
+        y++;
+        err += 1 + 2*y;
+        if (2*(err - x) + 1 > 0) {
+            x--;
+            err += 1 - 2*x;
+        }
     }
-  }
 }
 
-void buf_clean(wchar_t buf[H][W]){
+void draw_box(char buf[H][W]);
+
+void buf_clean(char buf[H][W]){
   int i, j;
   for (i = 0; i < H; ++i){
     for (j = 0; j < W; ++j){
@@ -53,7 +61,7 @@ void buf_clean(wchar_t buf[H][W]){
   return;
 }
 
-void buf_print(wchar_t buf[H][W]){
+void buf_print(char buf[H][W]){
   int i, j;
   setlocale(LC_ALL, "");
   wprintf(L"\033[H");

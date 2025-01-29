@@ -4,12 +4,13 @@
 #include <unistd.h>
 #include <wchar.h>
 
+#if 0
 int main(){
   system("clear");
-  wchar_t buf[H][W] = {0};
+  char buf[H][W] = {0};
   int x = 10, y = 10;
   point cent = {x, y};
-  int r =8;
+  int r = 8;
   circle c = {cent, r};
   int x_vel = 1;
   int y_vel = 1;
@@ -31,4 +32,15 @@ int main(){
     usleep(DELAY);
   }
     return 0;
+}
+#endif
+
+int main(){
+  system("clear");
+  char buf[H][W] = {0};
+  circle c = {{0, 0}, 3};
+  buf_clean(buf);
+  draw_circle(buf, c, 3);
+buf_print(buf);
+  return 0;
 }
