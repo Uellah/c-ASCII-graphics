@@ -3,14 +3,13 @@
 
 
 #define RATIO 2
-#define W 40
+#define W 80
 #define H 40
 
 #define SCREEN_W 1535
 #define SCREEN_H 865
 
-#define CLEAN_RATE 1000
-#define FPS 25
+#define FPS 20
 
 #endif
 

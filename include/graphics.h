@@ -5,10 +5,10 @@
 
 typedef struct s_point point;
 typedef struct s_circle circle;
+typedef unsigned char u8;
 
 static const unsigned DELAY = 1000000 / FPS;
-static const wchar_t *BRIGHT = L" ░▒▓█";
-static const char BR_LEVEL = 5;
+static const u8 BR_LEVEL = 5;
 
 struct s_point{
   int x;
@@ -20,11 +20,11 @@ struct s_circle{
   int r;
 };
 
-
-void copy(char from[H][W], char to[H][W]);
-void buf_clean(char buf[H][W]);
-void buf_print(char buf[H][W]);
-void draw_circle(char buf[H][W], circle circ, char bright);
-void draw_box(char buf[H][W]);
-
+void copy(u8 from[H][W], u8 to[H][W]);
+void buf_clean(u8 buf[H][W]);
+void buf_print(u8 buf[H][W]);
+void draw_circle(u8 buf[H][W], circle circ, u8 bright);
+void draw_box(u8 buf[H][W]);
+void end();
+void init();
 #endif
