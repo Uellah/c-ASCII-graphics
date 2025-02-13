@@ -2,10 +2,10 @@
 #define H_GRAPHICS
 
 #include "config.h"
+#include "types.h"
 
 typedef struct s_point point;
 typedef struct s_circle circle;
-typedef unsigned char u8;
 
 static const unsigned DELAY = 1000000 / FPS;
 static const u8 BR_LEVEL = 5;

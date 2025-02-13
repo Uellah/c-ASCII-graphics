@@ -1,9 +1,8 @@
-#include <stdio.h>
 #include <stdlib.h>
-#include <unistd.h>
 #include <locale.h>
 #include <ncursesw/ncurses.h>
 #include <wchar.h>
+
 #include "graphics.h"
 
 static const wchar_t *BRIGHT = L" ░▒▓█";
