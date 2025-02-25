@@ -3,8 +3,8 @@
 
 
 #define RATIO 2
-#define W 120
-#define H 60
+#define W 240
+#define H 120
 
 #define SCREEN_W 1535
 #define SCREEN_H 865

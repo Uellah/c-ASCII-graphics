@@ -5,6 +5,7 @@
 #include "types.h"
 
 #define g 9.81
+#define G 6e-3
 
 typedef struct vec_2d vec_2d;
 
@@ -20,6 +21,6 @@ struct object{
   int r;         // Радиус круга
 };
 
-void update(struct object *obj);
+void update(struct object *obj, int len);
 
 #endif
